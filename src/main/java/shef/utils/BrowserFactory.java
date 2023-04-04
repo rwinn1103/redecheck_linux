@@ -8,6 +8,9 @@ import org.openqa.selenium.opera.OperaDriver;
 //import org.openqa.selenium.phantomjs.PhantomJSDriver;
 //import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+//import selenium.webdriver.firefox.options;
+import org.openqa.selenium.firefox.FirefoxOptions;
+//import com.google.common.collect;
 
 import java.io.IOException;
 
@@ -22,8 +25,18 @@ public class BrowserFactory {
         if (browser.equals("firefox")) {
             DesiredCapabilities Tcap = new DesiredCapabilities().firefox();
             Tcap.setCapability("marionette", false);
-            //cap = DesiredCapabilities().FIREFOX;
-            //cap["marionette"] = false;
+            Tcap.setCapability("headless", true);
+            Tcap.setCapability("browser.headless", true);
+            //Tcap.setCapability("moz:firefoxOptions.args", "--headless");
+            //Tcap["headless"] = true;
+            //Tcap.setHeadless(true);
+            FirefoxOptions options = new FirefoxOptions();
+            //options.setHeadless(true);
+            options.addArguments("--headless");
+            Tcap.setCapability("moz:firefoxOptions", options);
+            //Tcap.merge(options);
+            //options.merge(Capabilities Tcap);
+            //Tcap.setCapability(FirefoxOptions.CAPABILITY, options);
             webDriver = new FirefoxDriver(Tcap);
         } else if (browser.equals("chrome")) {
             ChromeOptions options = new ChromeOptions();
